@@ -3,11 +3,14 @@ import vm from 'node:vm';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
-import { buildAPIContext } from '../utils/build-api-context.js';
+import buildAPIContext from '../utils/build-api-context.cjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const createContext = (modulePath) => {
   const context = {
-    api: buildAPIContext(modulePath)
+    ...buildAPIContext(modulePath),
+    __dirname: modulePath,
   };
 
   return vm.createContext(context)
@@ -92,4 +95,4 @@ const runSandboxed = async (modulePath) => {
   }
 };
 
-runSandboxed('./application');
+runSandboxed(path.join(__dirname, './application'));

@@ -2,10 +2,10 @@ import { setTimeout } from 'node:timers'
 import fs from 'node:fs/promises'
 
 export declare global {
+  const console: {
+    log: (...messages?: any[],) => void
+  },
   const api: {
-    console: {
-      log: (...messages?: any[],) => void;
-    };
     timers: {
       setTimeout: typeof setTimeout
     },
@@ -14,4 +14,3 @@ export declare global {
     }
   }
 }
-

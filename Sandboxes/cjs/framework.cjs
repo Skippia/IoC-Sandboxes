@@ -1,10 +1,13 @@
-import fs from 'node:fs/promises'
-import vm from 'node:vm'
-import { buildAPIContext } from '../utils/build-api-context.js';
+const fs = require('node:fs/promises')
+const vm = require('node:vm')
+const path = require('node:path')
+const buildAPIContext = require('../utils/build-api-context.cjs')
+
 // import sandboxedFs from 'sandboxed-fs'
-// import sandboxedFs from '../utils/sandboxed-fs.js'
 // import { cloneInterface, wrapFunction } from '../utils/wrapper.js'
 
+
+// const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const EXECUTION_TIMEOUT = 5000;
 
 const safeRequire = (name) => {
@@ -23,7 +26,8 @@ const createContext = (modulePath) => {
       exports: {}
     },
     require: safeRequire,
-    api: buildAPIContext(modulePath)
+    __dirname: modulePath,
+    ...buildAPIContext(modulePath),
   };
   // Without creating recursive link — we won't be able to get access to global in code
   contextData.global = contextData;
@@ -32,7 +36,8 @@ const createContext = (modulePath) => {
 }
 
 const runSandboxed = async (modulePath) => {
-  const filename = `${modulePath}/main.cjs`;
+  const filename = path.join(modulePath, 'main.cjs');
+
   // 1. Create context
   const context = createContext(modulePath)
 
@@ -60,4 +65,4 @@ const runSandboxed = async (modulePath) => {
   // }
 };
 
-runSandboxed('./application').catch(e => console.error('Error:', e))
+runSandboxed(path.join(__dirname, './application')).catch(e => console.error('Error:', e))
