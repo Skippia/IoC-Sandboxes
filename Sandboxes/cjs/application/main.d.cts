@@ -1,5 +1,5 @@
-import { setTimeout } from 'node:timers'
-import fs from 'node:fs/promises'
+import type fs from 'node:fs/promises'
+import type { setTimeout } from 'node:timers'
 
 export declare global {
   const console: {
@@ -8,7 +8,7 @@ export declare global {
   const api: {
     timers: {
       setTimeout: typeof setTimeout
-    },
+    }
     fs: {
       readFile: typeof fs.readFile
     }

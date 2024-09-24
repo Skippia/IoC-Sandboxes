@@ -1,11 +1,39 @@
 {
+  "name": "v8-sandboxes",
   "type": "module",
-  "devDependencies": {
-    "@types/node": "^22.6.1",
-    "typescript": "^5.6.2"
+  "version": "1.0.0",
+  "description": "Node.js V8 Sandboxes: Allow to execute code in an isolated sandbox environment using Node.js vm module by controlling imports, restricting file system access, and exposing limited APIs.",
+  "author": "Your Name <your-email@example.com>",
+  "homepage": "https://github.com/Skippia/V8-Sandboxes#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/v8-sandboxes.git"
+  },
+  "keywords": [
+    "node.js",
+    "v8",
+    "vm",
+    "sandbox",
+    "untrusted code",
+    "security",
+    "custom imports",
+    "module restriction",
+    "api exposure",
+    "file system restriction"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
   },
   "scripts": {
     "cjs": "node ./Sandboxes/cjs/framework.cjs",
-    "mjs": "node --experimental-vm-modules ./Sandboxes/mjs/framework.mjs"
+    "mjs": "node --experimental-vm-modules ./Sandboxes/mjs/framework.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.7.1",
+    "@types/node": "^22.6.1",
+    "eslint": "^9.11.1",
+    "typescript": "^5.6.2"
   }
 }

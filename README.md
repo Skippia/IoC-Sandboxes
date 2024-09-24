@@ -36,7 +36,7 @@ const createContext = (modulePath) => {
     __dirname: modulePath,
   };
 
-  return vm.createContext(context)
+    return vm.createContext(context)
 };
 
 const runSandboxed = async (modulePath) => {
