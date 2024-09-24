@@ -1,5 +1,18 @@
 # V8 Sandboxes
 
+<p align="center">
+  <a href="#description" style="color:#1E90FF;">Description</a> |
+  <a href="#key-concepts" style="color:#32CD32;">Key Concepts</a> |
+  <a href="#file-structure" style="color:#FF6347;">File Structure</a> |
+  <a href="#scripts" style="color:#FFD700;">Scripts</a> |
+  <a href="#usage" style="color:#FF69B4;">Usage</a> |
+  <a href="#notes" style="color:#8A2BE2;">Notes</a>
+</p>
+
+---
+
+## Description
+
 This repository demonstrates how to create a sandboxed environment in Node.js using the V8 engine's `vm` module. The goal is to securely execute untrusted code by controlling and intercepting module imports and exports, and restricting access to certain Node.js APIs and the file system.
 
 ---
@@ -19,7 +32,7 @@ It's possible to provide a limited global object to the sandboxed code, exposing
 Ensures sandboxed code can only access files within a specified directory, preventing unauthorized access to the broader file system.
 
 ### Matrix Environment
-You can run create any environment and make sure that code inside will have no idea that something wrong
+You can run create any environment and make sure that code inside that environment will have no idea that this environment is fully proxied / man-made.
 
 ---
 
@@ -108,7 +121,7 @@ npm run mjs
 ```
 ---
 
-## Examples
+## Usage
 
 - The code in `main.mjs` tries to read files but can only access local files (within its own / nested directories).
 - The code in `main.mjs` runs the `console.log` global method, but it’s actually a proxied version of the original `console.log` with custom behavior.
